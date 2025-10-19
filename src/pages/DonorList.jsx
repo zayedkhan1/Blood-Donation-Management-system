@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { FaSearch, FaFilter, FaHeart, FaPhone, FaMapMarkerAlt, FaTint, FaTimes, FaCheckCircle, FaTimesCircle, FaSort, FaSortUp, FaSortDown, FaEnvelope, FaCalendar, FaIdCard, FaUser } from 'react-icons/fa';
+import Loading from '../components/Loading';
 
 const DonorList = () => {
   const [donors, setDonors] = useState([]);
@@ -49,14 +50,14 @@ const DonorList = () => {
   useEffect(() => {
     let result = donors.filter(donor => {
       const matchesSearch = donor.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          donor.area?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          donor.bloodType?.toLowerCase().includes(searchTerm.toLowerCase());
-      
+        donor.area?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        donor.bloodType?.toLowerCase().includes(searchTerm.toLowerCase());
+
       const matchesBloodType = selectedBloodType === 'All' || donor.bloodType === selectedBloodType;
       const matchesArea = selectedArea === 'All' || donor.area === selectedArea;
-      const matchesAvailability = availabilityFilter === 'All' || 
-                                 (availabilityFilter === 'Available' && donor.isAvailable) ||
-                                 (availabilityFilter === 'Not Available' && !donor.isAvailable);
+      const matchesAvailability = availabilityFilter === 'All' ||
+        (availabilityFilter === 'Available' && donor.isAvailable) ||
+        (availabilityFilter === 'Not Available' && !donor.isAvailable);
 
       return matchesSearch && matchesBloodType && matchesArea && matchesAvailability;
     });
@@ -101,22 +102,15 @@ const DonorList = () => {
       // const donor = donors.find(d => d.id === donorId);
       const donor = donors.find(d => d._id === donorId);//new line
       const newAvailability = !donor.isAvailable;
-      
-      // Update in backend
-      // const response = await fetch(`http://localhost:5000/donors/${donorId}`, {
-      //   method: 'PATCH',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({ isAvailable: newAvailability }),
-      // });
+
+
       // ---------new line---------
-  const response= await fetch(`http://localhost:5000/donors/${donorId}/availability`, {
-  method: 'PATCH',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ isAvailable: newAvailability }),
-});
-      
+      const response = await fetch(`http://localhost:5000/donors/${donorId}/availability`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isAvailable: newAvailability }),
+      });
+
       // ---------new line---------
 
       if (!response.ok) {
@@ -124,8 +118,8 @@ const DonorList = () => {
       }
 
       // Update local state
-      setDonors(prevDonors => 
-        prevDonors.map(donor => 
+      setDonors(prevDonors =>
+        prevDonors.map(donor =>
           donor._id === donorId ? { ...donor, isAvailable: newAvailability } : donor//donor.id instead of donor._id
         )
       );
@@ -159,21 +153,14 @@ const DonorList = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-100 py-8 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
-            <FaHeart className="w-8 h-8 text-white" />
-          </div>
-          <h2 className="text-2xl font-bold text-gray-900">Loading donors...</h2>
-        </div>
-      </div>
-    );
+     <Loading></Loading>
+    )
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-100 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto mt-10">
-      
+
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
@@ -352,7 +339,7 @@ const DonorList = () => {
                   ].map(({ key, label }) => {
                     const SortIcon = getSortIcon(key);
                     return (
-                      <th 
+                      <th
                         key={key}
                         className="px-6 py-4 text-left font-semibold cursor-pointer hover:bg-red-700 transition-colors duration-200"
                         onClick={() => handleSort(key)}
@@ -371,7 +358,7 @@ const DonorList = () => {
                 {filteredDonors.map((donor) => (
                   <tr key={donor.id} className="hover:bg-red-50 transition-colors duration-200">
                     <td className="px-6 py-4">
-                      <div 
+                      <div
                         className="flex items-center space-x-3 cursor-pointer"
                         onClick={() => viewDonorDetails(donor)}
                       >
@@ -391,9 +378,8 @@ const DonorList = () => {
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center space-x-2">
-                        <FaTint className={`w-4 h-4 ${
-                          donor.bloodType?.includes('+') ? 'text-red-600' : 'text-blue-600'
-                        }`} />
+                        <FaTint className={`w-4 h-4 ${donor.bloodType?.includes('+') ? 'text-red-600' : 'text-blue-600'
+                          }`} />
                         <span className="font-semibold text-gray-900">{donor.bloodType}</span>
                       </div>
                     </td>
@@ -410,11 +396,10 @@ const DonorList = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <div className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full text-sm font-semibold ${
-                        donor.isAvailable 
-                          ? 'bg-green-100 text-green-800' 
-                          : 'bg-red-100 text-red-800'
-                      }`}>
+                      <div className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full text-sm font-semibold ${donor.isAvailable
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-red-100 text-red-800'
+                        }`}>
                         {donor.isAvailable ? (
                           <>
                             <FaCheckCircle className="w-4 h-4" />
@@ -435,7 +420,7 @@ const DonorList = () => {
                       >
                         View Details
                       </button>
-                     
+
                     </td>
                   </tr>
                 ))}
@@ -449,7 +434,7 @@ const DonorList = () => {
               <div key={donor.id} className="bg-white border-2 border-gray-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
                 <div className="space-y-4">
                   {/* Header */}
-                  <div 
+                  <div
                     className="flex items-center justify-between cursor-pointer"
                     onClick={() => viewDonorDetails(donor)}
                   >
@@ -465,9 +450,8 @@ const DonorList = () => {
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <FaTint className={`w-5 h-5 ${
-                        donor.bloodType?.includes('+') ? 'text-red-600' : 'text-blue-600'
-                      }`} />
+                      <FaTint className={`w-5 h-5 ${donor.bloodType?.includes('+') ? 'text-red-600' : 'text-blue-600'
+                        }`} />
                       <span className="font-bold text-gray-900">{donor.bloodType}</span>
                     </div>
                   </div>
@@ -489,11 +473,10 @@ const DonorList = () => {
 
                   {/* Status and Action */}
                   <div className="flex flex-col gap-3 pt-4 border-t border-gray-200">
-                    <div className={`inline-flex items-center space-x-2 px-3 py-2 rounded-full text-sm font-semibold w-fit ${
-                      donor.isAvailable 
-                        ? 'bg-green-100 text-green-800' 
-                        : 'bg-red-100 text-red-800'
-                    }`}>
+                    <div className={`inline-flex items-center space-x-2 px-3 py-2 rounded-full text-sm font-semibold w-fit ${donor.isAvailable
+                      ? 'bg-green-100 text-green-800'
+                      : 'bg-red-100 text-red-800'
+                      }`}>
                       {donor.isAvailable ? (
                         <>
                           <FaCheckCircle className="w-4 h-4" />
@@ -515,11 +498,10 @@ const DonorList = () => {
                       </button>
                       <button
                         onClick={() => toggleAvailability(donor.id)}
-                        className={`flex-1 px-4 py-2 rounded-xl font-semibold transition-all duration-300 ${
-                          donor.isAvailable
-                            ? 'bg-red-600 text-white hover:bg-red-700'
-                            : 'bg-green-600 text-white hover:bg-green-700'
-                        }`}
+                        className={`flex-1 px-4 py-2 rounded-xl font-semibold transition-all duration-300 ${donor.isAvailable
+                          ? 'bg-red-600 text-white hover:bg-red-700'
+                          : 'bg-green-600 text-white hover:bg-green-700'
+                          }`}
                       >
                         {donor.isAvailable ? 'Unavailable' : 'Available'}
                       </button>
@@ -578,11 +560,10 @@ const DonorList = () => {
             <div className="p-6 space-y-6">
               {/* Blood Type Badge */}
               <div className="flex justify-center">
-                <div className={`inline-flex items-center space-x-3 px-6 py-3 rounded-full text-lg font-bold ${
-                  selectedDonor.bloodType?.includes('+') 
-                    ? 'bg-red-100 text-red-800' 
-                    : 'bg-blue-100 text-blue-800'
-                }`}>
+                <div className={`inline-flex items-center space-x-3 px-6 py-3 rounded-full text-lg font-bold ${selectedDonor.bloodType?.includes('+')
+                  ? 'bg-red-100 text-red-800'
+                  : 'bg-blue-100 text-blue-800'
+                  }`}>
                   <FaTint className="w-6 h-6" />
                   <span>Blood Type: {selectedDonor.bloodType}</span>
                 </div>
@@ -594,7 +575,7 @@ const DonorList = () => {
                   <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">
                     Personal Information
                   </h3>
-                  
+
                   <div className="space-y-3">
                     <div className="flex items-center space-x-3">
                       <FaIdCard className="w-5 h-5 text-red-600" />
@@ -629,7 +610,7 @@ const DonorList = () => {
                   <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">
                     Contact Information
                   </h3>
-                  
+
                   <div className="space-y-3">
                     <div className="flex items-center space-x-3">
                       <FaPhone className="w-5 h-5 text-red-600" />
@@ -688,7 +669,7 @@ const DonorList = () => {
                       <p className="font-semibold">
                         {selectedDonor.lastDonation ? (
                           <>
-                            {new Date(selectedDonor.lastDonation).toLocaleDateString()} 
+                            {new Date(selectedDonor.lastDonation).toLocaleDateString()}
                             <span className="text-sm text-gray-600 ml-2">
                               ({getDaysSinceLastDonation(selectedDonor.lastDonation)} days ago)
                             </span>
@@ -719,11 +700,10 @@ const DonorList = () => {
                 <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">
                   Current Status
                 </h3>
-                <div className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full text-lg font-semibold ${
-                  selectedDonor.isAvailable 
-                    ? 'bg-green-100 text-green-800' 
-                    : 'bg-red-100 text-red-800'
-                }`}>
+                <div className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full text-lg font-semibold ${selectedDonor.isAvailable
+                  ? 'bg-green-100 text-green-800'
+                  : 'bg-red-100 text-red-800'
+                  }`}>
                   {selectedDonor.isAvailable ? (
                     <>
                       <FaCheckCircle className="w-5 h-5" />
@@ -764,11 +744,10 @@ const DonorList = () => {
               <div className="flex justify-end space-x-3">
                 <button
                   onClick={() => toggleAvailability(selectedDonor.id)}
-                  className={`px-6 py-2 rounded-xl font-semibold transition-all duration-300 ${
-                    selectedDonor.isAvailable
-                      ? 'bg-red-600 text-white hover:bg-red-700'
-                      : 'bg-green-600 text-white hover:bg-green-700'
-                  }`}
+                  className={`px-6 py-2 rounded-xl font-semibold transition-all duration-300 ${selectedDonor.isAvailable
+                    ? 'bg-red-600 text-white hover:bg-red-700'
+                    : 'bg-green-600 text-white hover:bg-green-700'
+                    }`}
                 >
                   {selectedDonor.isAvailable ? 'Mark Unavailable' : 'Mark Available'}
                 </button>
@@ -784,7 +763,7 @@ const DonorList = () => {
         </div>
       )}
 
-      
+
     </div>
   );
 };

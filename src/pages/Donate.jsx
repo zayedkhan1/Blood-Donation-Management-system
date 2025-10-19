@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaHeart, FaUser, FaPhone, FaMapMarkerAlt, FaCalendarAlt, FaTint, FaAmbulance, FaCheckCircle, FaArrowRight, FaVoicemail } from 'react-icons/fa';
 
-const Donate = ({userId}) => {
+const Donate = ({ userId }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
@@ -15,7 +15,7 @@ const Donate = ({userId}) => {
 
   const bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
   const areas = [
-  'Kanchan','Murapara','Bholabo','Gawsia','Kalni','Daudpur',
+    'Kanchan', 'Murapara', 'Bholabo', 'Gawsia', 'Kalni', 'Daudpur',
   ];
 
   const onSubmit = async (data) => {
@@ -27,26 +27,26 @@ const Donate = ({userId}) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-    
-       // Check if response is OK
-       if (!response.ok) {
-         throw new Error("Failed to submit donor data");
-       }
-      
-       const result = await response.json();
-       console.log("✅ Donor added successfully:", result)    
-       setIsSubmitting(false);
-       setSubmitSuccess(true);
-       reset    
-          // Reset success message after 5 seconds
-    setTimeout(() => setSubmitSuccess(false), 5000)
-       } catch (error) {
-       console.error("❌ Error submitting form:", error);
-       setIsSubmitting(false);
-       alert("Something went wrong while submitting. Please try again!");
-     }
 
-    
+      // Check if response is OK
+      if (!response.ok) {
+        throw new Error("Failed to submit donor data");
+      }
+
+      const result = await response.json();
+      console.log("✅ Donor added successfully:", result)
+      setIsSubmitting(false);
+      setSubmitSuccess(true);
+      reset
+      // Reset success message after 5 seconds
+      setTimeout(() => setSubmitSuccess(false), 5000)
+    } catch (error) {
+      console.error("❌ Error submitting form:", error);
+      setIsSubmitting(false);
+      alert("Something went wrong while submitting. Please try again!");
+    }
+
+
   };
 
 
@@ -112,7 +112,7 @@ const Donate = ({userId}) => {
                   <h3 className="text-lg font-semibold text-gray-900 border-l-4 border-red-500 pl-3">
                     Personal Information
                   </h3>
-                  
+
                   {/* Name Field */}
                   <div>
                     <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
@@ -120,15 +120,14 @@ const Donate = ({userId}) => {
                       Full Name
                     </label>
                     <input
-                      {...register('fullName', { 
+                      {...register('fullName', {
                         required: 'Full name is required',
                         minLength: { value: 2, message: 'Name must be at least 2 characters' }
                       })}
                       type="text"
                       placeholder="Enter your full name"
-                      className={`w-full px-4 py-3 rounded-xl border-2 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
-                        errors.fullName ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-red-500'
-                      }`}
+                      className={`w-full px-4 py-3 rounded-xl border-2 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${errors.fullName ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-red-500'
+                        }`}
                     />
                     {errors.fullName && (
                       <p className="text-red-500 text-sm mt-1 flex items-center">
@@ -136,7 +135,7 @@ const Donate = ({userId}) => {
                       </p>
                     )}
                   </div>
-                  
+
                   {/* Email Field */}
                   <div>
                     <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
@@ -144,15 +143,14 @@ const Donate = ({userId}) => {
                       Email
                     </label>
                     <input
-                      {...register('email', { 
+                      {...register('email', {
                         required: 'email is required',
                         minLength: { value: 5, message: 'email must be at least 5 characters' }
                       })}
                       type="email"
                       placeholder="Enter your Email"
-                      className={`w-full px-4 py-3 rounded-xl border-2 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
-                        errors.fullName ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-red-500'
-                      }`}
+                      className={`w-full px-4 py-3 rounded-xl border-2 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${errors.fullName ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-red-500'
+                        }`}
                     />
                     {errors.email && (
                       <p className="text-red-500 text-sm mt-1 flex items-center">
@@ -169,7 +167,7 @@ const Donate = ({userId}) => {
                         Primary Phone
                       </label>
                       <input
-                        {...register('primaryPhone', { 
+                        {...register('primaryPhone', {
                           required: 'Primary phone is required',
                           pattern: {
                             value: /^[0-9+\-\s()]{10,}$/,
@@ -178,9 +176,8 @@ const Donate = ({userId}) => {
                         })}
                         type="tel"
                         placeholder="+1 (555) 123-4567"
-                        className={`w-full px-4 py-3 rounded-xl border-2 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
-                          errors.primaryPhone ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-red-500'
-                        }`}
+                        className={`w-full px-4 py-3 rounded-xl border-2 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${errors.primaryPhone ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-red-500'
+                          }`}
                       />
                       {errors.primaryPhone && (
                         <p className="text-red-500 text-sm mt-1">{errors.primaryPhone.message}</p>
@@ -217,7 +214,7 @@ const Donate = ({userId}) => {
                         Age
                       </label>
                       <input
-                        {...register('age', { 
+                        {...register('age', {
                           required: 'Age is required',
                           min: { value: 18, message: 'Must be at least 18 years old' },
                           max: { value: 65, message: 'Must be under 65 years old' },
@@ -228,9 +225,8 @@ const Donate = ({userId}) => {
                         })}
                         type="number"
                         placeholder="Your age"
-                        className={`w-full px-4 py-3 rounded-xl border-2 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
-                          errors.age ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-red-500'
-                        }`}
+                        className={`w-full px-4 py-3 rounded-xl border-2 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${errors.age ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-red-500'
+                          }`}
                       />
                       {errors.age && (
                         <p className="text-red-500 text-sm mt-1">{errors.age.message}</p>
@@ -244,9 +240,8 @@ const Donate = ({userId}) => {
                       </label>
                       <select
                         {...register('bloodType', { required: 'Blood type is required' })}
-                        className={`w-full px-4 py-3 rounded-xl border-2 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 appearance-none ${
-                          errors.bloodType ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-red-500'
-                        }`}
+                        className={`w-full px-4 py-3 rounded-xl border-2 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 appearance-none ${errors.bloodType ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-red-500'
+                          }`}
                       >
                         <option value="">Select your blood type</option>
                         {bloodTypes.map(type => (
@@ -273,15 +268,14 @@ const Donate = ({userId}) => {
                       Full Address
                     </label>
                     <input
-                      {...register('address', { 
+                      {...register('address', {
                         required: 'Address is required',
                         minLength: { value: 5, message: 'Address must be at least 5 characters' }
                       })}
                       type="text"
                       placeholder="Enter your complete address"
-                      className={`w-full px-4 py-3 rounded-xl border-2 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
-                        errors.address ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-red-500'
-                      }`}
+                      className={`w-full px-4 py-3 rounded-xl border-2 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${errors.address ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-red-500'
+                        }`}
                     />
                     {errors.address && (
                       <p className="text-red-500 text-sm mt-1">{errors.address.message}</p>
@@ -296,9 +290,8 @@ const Donate = ({userId}) => {
                     </label>
                     <select
                       {...register('area', { required: 'Please select your area' })}
-                      className={`w-full px-4 py-3 rounded-xl border-2 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 appearance-none ${
-                        errors.area ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-red-500'
-                      }`}
+                      className={`w-full px-4 py-3 rounded-xl border-2 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 appearance-none ${errors.area ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-red-500'
+                        }`}
                     >
                       <option value="">Select your area</option>
                       {areas.map(area => (
@@ -314,34 +307,32 @@ const Donate = ({userId}) => {
 
                 {/* last donation */}
                 <div>
-  <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-    <FaCalendarAlt className="w-4 h-4 text-red-600 mr-2" />
-    Last Donation Date
-  </label>
-  <input
-    {...register('lastDonationDate', { 
-      required: 'Donation date is required',
-    })}
-    type="date"
-    className={`w-full px-4 py-3 rounded-xl border-2 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
-      errors.lastDonationDate ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-red-500'
-    }`}
-  />
-  {errors.lastDonationDate && (
-    <p className="text-red-500 text-sm mt-1">{errors.lastDonationDate.message}</p>
-  )}
-</div>
+                  <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
+                    <FaCalendarAlt className="w-4 h-4 text-red-600 mr-2" />
+                    Last Donation Date
+                  </label>
+                  <input
+                    {...register('lastDonationDate', {
+                      required: 'Donation date is required',
+                    })}
+                    type="date"
+                    className={`w-full px-4 py-3 rounded-xl border-2 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${errors.lastDonationDate ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-red-500'
+                      }`}
+                  />
+                  {errors.lastDonationDate && (
+                    <p className="text-red-500 text-sm mt-1">{errors.lastDonationDate.message}</p>
+                  )}
+                </div>
 
 
                 {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full py-4 px-6 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center space-x-3 ${
-                    isSubmitting
+                  className={`w-full py-4 px-6 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center space-x-3 ${isSubmitting
                       ? 'bg-gray-400 cursor-not-allowed'
                       : 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 transform hover:scale-105 shadow-lg hover:shadow-red-500/30'
-                  } text-white`}
+                    } text-white`}
                 >
                   {isSubmitting ? (
                     <>
@@ -362,7 +353,7 @@ const Donate = ({userId}) => {
           {/* Sidebar Information */}
           <div className="space-y-6">
 
-                {/* Benefits Card */}
+            {/* Benefits Card */}
             <div className="bg-white rounded-3xl shadow-xl p-6">
               <h3 className="text-xl font-bold text-gray-900 mb-4">Donation Benefits</h3>
               <div className="space-y-3 text-sm text-gray-600">
@@ -413,7 +404,7 @@ const Donate = ({userId}) => {
                 </li>
               </ul>
             </div>
-        
+
           </div>
         </div>
       </div>

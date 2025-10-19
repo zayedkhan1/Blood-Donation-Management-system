@@ -79,10 +79,10 @@ const ContactUs = () => {
             <div className="bg-white rounded-2xl shadow-xl p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h2>
               <p className="text-gray-600 mb-6">
-                Have questions about blood donation? Want to organize a blood drive? 
+                Have questions about blood donation? Want to organize a blood drive?
                 We're here to help you make a difference.
               </p>
-              
+
               <div className="space-y-4">
                 {contactInfo.map((item, index) => (
                   <div key={index} className="flex items-start space-x-4 p-4 rounded-xl border-2 border-gray-100 hover:border-red-200 transition-all duration-300">

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FaHeart, FaArrowRight, FaPlay, FaUsers, FaAmbulance,  FaStar, FaTint, FaClock, FaMapMarkerAlt, FaShieldAlt, FaUserPlus, FaCheckCircle, FaCalendarAlt, FaHeartbeat, FaHandHoldingHeart, FaTimes, FaTimesCircle } from 'react-icons/fa';
+import { FaHeart, FaArrowRight, FaPlay, FaUsers, FaAmbulance, FaStar, FaTint, FaClock, FaMapMarkerAlt, FaShieldAlt, FaUserPlus, FaCheckCircle, FaCalendarAlt, FaHeartbeat, FaHandHoldingHeart, FaTimes, FaTimesCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const Banner = () => {
@@ -8,11 +8,11 @@ const Banner = () => {
   const [showModal, setShowModal] = useState(false);
 
 
-   
+
 
   useEffect(() => {
     setIsVisible(true);
-    
+
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % 3);
     }, 5000);
@@ -72,11 +72,10 @@ const Banner = () => {
         <section className="pt-20 pb-16 lg:pt-32 lg:pb-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              
+
               {/* Left Content */}
-              <div className={`space-y-8 transform transition-all duration-1000 ${
-                isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
-              }`}>
+              <div className={`space-y-8 transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
+                }`}>
                 {/* Badge */}
                 <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm border border-red-200 rounded-full px-4 py-2 shadow-lg">
                   <div className="w-2 h-2 bg-red-500 rounded-full animate-ping"></div>
@@ -93,8 +92,8 @@ const Banner = () => {
 
                 {/* Subtitle */}
                 <p className="text-xl text-gray-600 leading-relaxed max-w-2xl">
-                  Join our community of heroes. Your single blood donation can save up to 
-                  <span className="font-semibold text-red-600"> 3 lives</span>. Be the reason 
+                  Join our community of heroes. Your single blood donation can save up to
+                  <span className="font-semibold text-red-600"> 3 lives</span>. Be the reason
                   someone smiles today.
                 </p>
 
@@ -106,74 +105,74 @@ const Banner = () => {
                   </Link>
 
                   <button
-                  onClick={() => setShowModal(true)}
-                     className="group bg-white text-red-600 border-2 border-red-200 px-8 py-4 rounded-2xl font-semibold text-lg shadow-xl hover:shadow-red-500/20 transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3 hover:border-red-300">
+                    onClick={() => setShowModal(true)}
+                    className="group bg-white text-red-600 border-2 border-red-200 px-8 py-4 rounded-2xl font-semibold text-lg shadow-xl hover:shadow-red-500/20 transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3 hover:border-red-300">
                     <FaPlay className="w-5 h-5" />
                     <span>How It Works</span>
                   </button>
-                        {/* How It Works Modal */}
-        {/* Simple Modal */}
-      {showModal && (
-        <div className="fixed inset-0 bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full">
-            {/* Header */}
-            <div className="flex justify-between items-center p-6 border-b">
-              <h2 className="text-xl font-bold text-gray-900">How It Works</h2>
-              <button
-                onClick={() => setShowModal(false)}
-                className="text-gray-400 hover:text-gray-600 transition-colors"
-              >
-                <FaTimes className="w-5 h-5" />
-              </button>
-            </div>
+                  {/* How It Works Modal */}
+                  {/* Simple Modal */}
+                  {showModal && (
+                    <div className="fixed inset-0 bg-opacity-50 flex items-center justify-center p-4 z-50">
+                      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full">
+                        {/* Header */}
+                        <div className="flex justify-between items-center p-6 border-b">
+                          <h2 className="text-xl font-bold text-gray-900">How It Works</h2>
+                          <button
+                            onClick={() => setShowModal(false)}
+                            className="text-gray-400 hover:text-gray-600 transition-colors"
+                          >
+                            <FaTimes className="w-5 h-5" />
+                          </button>
+                        </div>
 
-            {/* Content */}
-            <div className="p-6 space-y-4">
-              <div className="flex items-start space-x-3">
-                <FaCheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                <div>
-                  <h3 className="font-semibold text-gray-900">Register as Donor</h3>
-                  <p className="text-gray-600 text-sm">Fill out our simple registration form</p>
-                </div>
-              </div>
+                        {/* Content */}
+                        <div className="p-6 space-y-4">
+                          <div className="flex items-start space-x-3">
+                            <FaCheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <h3 className="font-semibold text-gray-900">Register as Donor</h3>
+                              <p className="text-gray-600 text-sm">Fill out our simple registration form</p>
+                            </div>
+                          </div>
 
-              <div className="flex items-start space-x-3">
-                <FaCheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                <div>
-                  <h3 className="font-semibold text-gray-900">Get Verified</h3>
-                  <p className="text-gray-600 text-sm">Our team reviews your information</p>
-                </div>
-              </div>
+                          <div className="flex items-start space-x-3">
+                            <FaCheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <h3 className="font-semibold text-gray-900">Get Verified</h3>
+                              <p className="text-gray-600 text-sm">Our team reviews your information</p>
+                            </div>
+                          </div>
 
-              <div className="flex items-start space-x-3">
-                <FaCheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                <div>
-                  <h3 className="font-semibold text-gray-900">Receive Requests</h3>
-                  <p className="text-gray-600 text-sm">Get notified when your blood type is needed</p>
-                </div>
-              </div>
+                          <div className="flex items-start space-x-3">
+                            <FaCheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <h3 className="font-semibold text-gray-900">Receive Requests</h3>
+                              <p className="text-gray-600 text-sm">Get notified when your blood type is needed</p>
+                            </div>
+                          </div>
 
-              <div className="flex items-start space-x-3">
-                <FaCheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                <div>
-                  <h3 className="font-semibold text-gray-900">Donate & Save Lives</h3>
-                  <p className="text-gray-600 text-sm">Visit a blood bank and make a difference</p>
-                </div>
-              </div>
-            </div>
+                          <div className="flex items-start space-x-3">
+                            <FaCheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <h3 className="font-semibold text-gray-900">Donate & Save Lives</h3>
+                              <p className="text-gray-600 text-sm">Visit a blood bank and make a difference</p>
+                            </div>
+                          </div>
+                        </div>
 
-            {/* Footer */}
-            <div className="p-6 border-t">
-              <button
-                onClick={() => setShowModal(false)}
-                className="w-full bg-red-600 text-white py-3 rounded-xl font-semibold hover:bg-red-700 transition-colors"
-              >
-                Got It!
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+                        {/* Footer */}
+                        <div className="p-6 border-t">
+                          <button
+                            onClick={() => setShowModal(false)}
+                            className="w-full bg-red-600 text-white py-3 rounded-xl font-semibold hover:bg-red-700 transition-colors"
+                          >
+                            Got It!
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Quick Stats */}
@@ -181,7 +180,7 @@ const Banner = () => {
                   {stats.map((stat, index) => {
                     const Icon = stat.icon;
                     return (
-                      <div 
+                      <div
                         key={index}
                         className="text-center transform transition-all duration-500 hover:scale-110"
                         style={{ animationDelay: `${index * 200}ms` }}
@@ -198,9 +197,8 @@ const Banner = () => {
               </div>
 
               {/* Right Content - Hero Image/Illustration */}
-              <div className={`relative transform transition-all duration-1000 delay-300 ${
-                isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
-              }`}>
+              <div className={`relative transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
+                }`}>
                 <div className="relative">
                   {/* Main Card */}
                   <div className="bg-gradient-to-br from-red-500 to-red-700 rounded-3xl p-8 shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500">
@@ -216,11 +214,11 @@ const Banner = () => {
                           <div className="font-semibold text-gray-900">City General Hospital</div>
                           <div className="text-xs text-red-600 mt-1">⏰ Needed within 2 hours</div>
                         </div>
-                       <Link to='/donor-list'>
-                        <button  className="w-full bg-red-600 text-white py-3 rounded-xl font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300">
-                          I Can Help
-                        </button>
-                       </Link>
+                        <Link to='/donor-list'>
+                          <button className="w-full bg-red-600 text-white py-3 rounded-xl font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300">
+                            I Can Help
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -229,7 +227,7 @@ const Banner = () => {
                   <div className="absolute -top-4 -right-4 bg-white rounded-2xl p-4 shadow-2xl border border-red-200 animate-bounce">
                     <div className="flex items-center space-x-2">
                       <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                      <span className="text-sm font-semibold text-gray-700">25 Donors Online</span>
+                      <span className="text-sm font-semibold text-gray-700"> Donors Online</span>
                     </div>
                   </div>
 
@@ -265,7 +263,7 @@ const Banner = () => {
               {features.map((feature, index) => {
                 const Icon = feature.icon;
                 return (
-                  <div 
+                  <div
                     key={index}
                     className="group bg-gradient-to-br from-white to-red-50 border border-red-100 rounded-2xl p-6 shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-500"
                   >
@@ -289,7 +287,7 @@ const Banner = () => {
                 <h3 className="text-2xl font-bold mb-2">Emergency Blood Need?</h3>
                 <p className="text-red-100">Immediate assistance available 24/7</p>
               </div>
-              
+
               <div className="grid grid-cols-3 gap-4 text-center">
                 {emergencyContacts.map((contact, index) => (
                   <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-all duration-300">
@@ -301,9 +299,9 @@ const Banner = () => {
               </div>
 
               <div className="text-center lg:text-right">
-                <button className="bg-white text-red-600 px-8 py-3 rounded-xl font-semibold hover:bg-red-50 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                <a href='https://www.facebook.com/nssofficial2020' target='_blank' className="bg-white text-red-600 px-8 py-3 rounded-xl font-semibold hover:bg-red-50 transform hover:scale-105 transition-all duration-300 shadow-lg">
                   Request Emergency Blood
-                </button>
+                </a>
               </div>
             </div>
           </div>

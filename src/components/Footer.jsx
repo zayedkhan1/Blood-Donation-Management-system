@@ -4,19 +4,19 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { name: 'Find Donors', href: '/donors' },
-    { name: 'Blood Banks', href: '/blood-banks' },
-    { name: 'Eligibility', href: '/eligibility' },
+    { name: 'Find Donors', href: '/' },
+    { name: 'Blood Banks', href: '/' },
+    { name: 'Eligibility', href: '/' },
     { name: 'Events', href: '/events' },
-    { name: 'Success Stories', href: '/stories' },
+    { name: 'Success Stories', href: '/' },
   ];
 
   const resources = [
-    { name: 'Blood Types', href: '/blood-types' },
-    { name: 'Donation Process', href: '/process' },
-    { name: 'Health Tips', href: '/health-tips' },
-    { name: 'FAQ', href: '/faq' },
-    { name: 'Support', href: '/support' },
+    { name: 'Blood Types', href: '/' },
+    { name: 'Donation Process', href: '/' },
+    { name: 'Health Tips', href: '/' },
+    { name: 'FAQ', href: '/' },
+    { name: 'Support', href: '/' },
   ];
 
   const emergencyContacts = [
@@ -30,7 +30,7 @@ const Footer = () => {
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          
+
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-6">
@@ -42,7 +42,7 @@ const Footer = () => {
               </span>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              Connecting blood donors with those in need. Join our mission to save lives 
+              Connecting blood donors with those in need. Join our mission to save lives
               through voluntary blood donation. Every drop counts, every donor matters.
             </p>
             <div className="flex space-x-4">
@@ -127,8 +127,6 @@ const Footer = () => {
             </div>
           </div>
         </div>
-
-     \
       </div>
 
       {/* Bottom Bar */}
@@ -137,11 +135,11 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-center md:text-left">
               <p className="text-gray-300 text-sm">
-                &copy; {currentYear} BloodDonor. All rights reserved. 
+                &copy; {currentYear} BloodDonor. All rights reserved.
                 <span className="text-red-300 ml-2">Save Lives, Donate Blood</span>
               </p>
             </div>
-            
+
             <div className="flex flex-wrap justify-center gap-6 text-sm">
               <a href="/privacy" className="text-gray-300 hover:text-white transition-colors duration-200">
                 Privacy Policy

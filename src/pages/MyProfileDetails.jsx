@@ -1,149 +1,15 @@
 
-// import React, { useEffect, useState } from "react";
-// const MyProfileDetails = ({ userEmail }) => {
-//       const [donorData, setDonorData] = useState(null);
-//       const [isLoading, setIsLoading] = useState(false);
-      
-//         useEffect(() => {
-//           if (!userEmail) return;
-      
-//           const fetchProfile = async () => {
-//             try {
-//               setIsLoading(true);
-//               const res = await fetch(`http://localhost:5000/donors/${userEmail}`);
-//               if (!res.ok) throw new Error("Failed to fetch profile");
-//               const data = await res.json();
-//               setDonorData(data);
-//               setIsLoading(false);
-//             } catch (err) {
-//               console.error(err);
-//               setIsLoading(false);
-//             }
-//           };
-      
-//           fetchProfile();
-//         }, [userEmail]);
-      
-//   if (isLoading) return <p className="text-center mt-10">Loading...</p>;
-//   if (!donorData) return <p className="text-center mt-10">No profile found.</p>;
-//     return (
-//         <div>
-//             <div className="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
-//       <h1 className="text-3xl font-bold mb-6 text-center">My Profile</h1>
-      
-//       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//         <div>
-//           <p className="font-semibold">Full Name:</p>
-//           <p>{donorData.fullName}</p>
-//         </div>
-//         <div>
-//           <p className="font-semibold">Email:</p>
-//           <p>{donorData.email}</p>
-//         </div>
-//         <div>
-//           <p className="font-semibold">Primary Phone:</p>
-//           <p>{donorData.primaryPhone}</p>
-//         </div>
-//         <div>
-//           <p className="font-semibold">Secondary Phone:</p>
-//           <p>{donorData.secondaryPhone}</p>
-//         </div>
-//         <div>
-//           <p className="font-semibold">Age:</p>
-//           <p>{donorData.age}</p>
-//         </div>
-//         <div>
-//           <p className="font-semibold">Blood Type:</p>
-//           <p>{donorData.bloodType}</p>
-//         </div>
-//         <div>
-//           <p className="font-semibold">Address:</p>
-//           <p>{donorData.address}</p>
-//         </div>
-//         <div>
-//           <p className="font-semibold">Area:</p>
-//           <p>{donorData.area}</p>
-//         </div>
-//       </div>
-
-//       <div className="mt-6 text-center">
-//         <p className="text-gray-500 text-sm">User ID: {donorData.userId}</p>
-
-//  {/* -------------------------try----------------------------------- */}
-
-// <div className="mt-6 text-center">
-//   <button
-//     onClick={async () => {
-//       try {
-//         const res = await fetch(`http://localhost:5000/donors/${donorData._id}/availability`, {
-//           method: "PATCH",
-//           headers: { "Content-Type": "application/json" },
-//           body: JSON.stringify({ isAvailable: !donorData.isAvailable }),
-//         });
-//         if (res.ok) {
-//           const updated = { ...donorData, isAvailable: !donorData.isAvailable };
-//           setDonorData(updated);
-//         }
-//       } catch (err) {
-//         console.error("❌ Failed to update availability:", err);
-//       }
-//     }}
-//     className={`px-4 py-2 rounded-md text-white ${
-//       donorData.isAvailable ? "bg-red-500 hover:bg-red-600" : "bg-green-500 hover:bg-green-600"
-//     }`}
-//   >
-//     {donorData.isAvailable ? "Mark as Not Available" : "Mark as Available"}
-//   </button>
-// </div>
-
-
-
-
-
-//  {/* -------------------------try----------------------------------- */}
-
-//       </div>
-
-//       <div>
-//         {/* --------------try----------- */}
-        
-
-//   <p className="font-semibold">Availability Status:</p>
-//   <p
-//     className={`font-bold ${
-//       donorData.isAvailable ? "text-green-600" : "text-red-600"
-//     }`}
-//   >
-//     {donorData.isAvailable ? "Available" : "Not Available"}
-//   </p>
-// </div>
-//         {/* --------------try----------- */}
-
-     
-//     </div>
-//         </div>
-//     );
-// };
-
-// export default MyProfileDetails;
-
-
-
-
-
-
-
 import React, { useEffect, useState } from "react";
-import { 
-  FaUser, 
-  FaEnvelope, 
-  FaPhone, 
-  FaMapMarkerAlt, 
-  FaTint, 
-  FaCalendarAlt, 
-  FaHeart, 
-  FaEdit, 
-  FaCheckCircle, 
+import {
+  FaUser,
+  FaEnvelope,
+  FaPhone,
+  FaMapMarkerAlt,
+  FaTint,
+  FaCalendarAlt,
+  FaHeart,
+  FaEdit,
+  FaCheckCircle,
   FaTimesCircle,
   FaSync,
   FaIdCard
@@ -153,6 +19,12 @@ const MyProfileDetails = ({ userEmail }) => {
   const [donorData, setDonorData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
+  // -------------------------------try-------------------------
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedData, setEditedData] = useState({});
+  // -------------------------------try-------------------------
+
 
   useEffect(() => {
     if (!userEmail) return;
@@ -176,7 +48,7 @@ const MyProfileDetails = ({ userEmail }) => {
 
   const toggleAvailability = async () => {
     if (!donorData) return;
-    
+
     try {
       setIsUpdating(true);
       const res = await fetch(`http://localhost:5000/donors/${donorData._id}/availability`, {
@@ -184,7 +56,7 @@ const MyProfileDetails = ({ userEmail }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ isAvailable: !donorData.isAvailable }),
       });
-      
+
       if (res.ok) {
         const updated = { ...donorData, isAvailable: !donorData.isAvailable };
         setDonorData(updated);
@@ -195,6 +67,28 @@ const MyProfileDetails = ({ userEmail }) => {
       setIsUpdating(false);
     }
   };
+
+  // -------------------------------try-------------------------
+  const handleUpdateProfile = async () => {
+    try {
+      const res = await fetch(`http://localhost:5000/donors/${donorData._id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(editedData),
+      });
+
+      if (!res.ok) throw new Error("Failed to update profile");
+
+      setDonorData((prev) => ({ ...prev, ...editedData }));
+      setIsEditing(false);
+      alert("✅ Profile updated successfully!");
+    } catch (err) {
+      console.error("❌ Update failed:", err);
+      alert("Failed to update profile.");
+    }
+  };
+  // -------------------------------try-------------------------
+
 
   if (isLoading) {
     return (
@@ -301,11 +195,10 @@ const MyProfileDetails = ({ userEmail }) => {
         {/* Main Profile Card */}
         <div className="bg-white rounded-3xl shadow-2xl overflow-hidden mb-8">
           {/* Status Header */}
-          <div className={`p-6 text-white ${
-            donorData.isAvailable 
-              ? 'bg-gradient-to-r from-green-600 to-green-700' 
-              : 'bg-gradient-to-r from-red-600 to-red-700'
-          }`}>
+          <div className={`p-6 text-white ${donorData.isAvailable
+            ? 'bg-gradient-to-r from-green-600 to-green-700'
+            : 'bg-gradient-to-r from-red-600 to-red-700'
+            }`}>
             <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
@@ -322,15 +215,14 @@ const MyProfileDetails = ({ userEmail }) => {
                   </p>
                 </div>
               </div>
-              
+
               <button
                 onClick={toggleAvailability}
                 disabled={isUpdating}
-                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center space-x-2 ${
-                  donorData.isAvailable
-                    ? 'bg-white text-red-600 hover:bg-red-50'
-                    : 'bg-white text-green-600 hover:bg-green-50'
-                } ${isUpdating ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}`}
+                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center space-x-2 ${donorData.isAvailable
+                  ? 'bg-white text-red-600 hover:bg-red-50'
+                  : 'bg-white text-green-600 hover:bg-green-50'
+                  } ${isUpdating ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}`}
               >
                 {isUpdating ? (
                   <FaSync className="w-4 h-4 animate-spin" />
@@ -352,7 +244,7 @@ const MyProfileDetails = ({ userEmail }) => {
           {/* Profile Information */}
           <div className="p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {profileFields.map((field, index) => {
+              {/* {profileFields.map((field, index) => {
                 const Icon = field.icon;
                 return (
                   <div 
@@ -374,7 +266,50 @@ const MyProfileDetails = ({ userEmail }) => {
                     </div>
                   </div>
                 );
+              })} */}
+
+              {/* ---------------------------try------------------- */}
+
+              {profileFields.map((field, index) => {
+                const Icon = field.icon;
+                const key = field.label.replace(/\s+/g, '').toLowerCase(); // simple key
+                return (
+                  <div
+                    key={index}
+                    className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-200 hover:border-red-200 transition-all duration-300 hover:shadow-lg"
+                  >
+                    <div className="flex items-center space-x-4">
+                      <div className={`w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center ${field.color}`}>
+                        <Icon className="w-6 h-6" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-semibold text-gray-600 mb-1">
+                          {field.label}
+                        </p>
+                        {isEditing ? (
+                          <input
+                            className="border border-gray-300 rounded-md px-3 py-2 w-full"
+                            defaultValue={field.value}
+                            onChange={(e) =>
+                              setEditedData((prev) => ({
+                                ...prev,
+                                [field.label.toLowerCase().replace(/\s/g, '')]: e.target.value,
+                              }))
+                            }
+                          />
+                        ) : (
+                          <p className="text-lg font-semibold text-gray-900">{field.value}</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
               })}
+
+
+              {/* ---------------------------try------------------- */}
+
+
             </div>
 
             {/* User ID Section */}
@@ -419,7 +354,7 @@ const MyProfileDetails = ({ userEmail }) => {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="bg-white text-red-600 border-2 border-red-200 px-8 py-3 rounded-xl font-semibold hover:border-red-300 hover:bg-red-50 transition-all duration-300 flex items-center justify-center space-x-2">
+          {/* <button className="bg-white text-red-600 border-2 border-red-200 px-8 py-3 rounded-xl font-semibold hover:border-red-300 hover:bg-red-50 transition-all duration-300 flex items-center justify-center space-x-2">
             <FaEdit className="w-5 h-5" />
             <span>Edit Profile</span>
           </button>
@@ -427,7 +362,30 @@ const MyProfileDetails = ({ userEmail }) => {
           <button className="bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-3 rounded-xl font-semibold hover:from-red-700 hover:to-red-800 transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-red-500/30">
             <FaSync className="w-5 h-5" />
             <span>Update Information</span>
-          </button>
+          </button> */}
+
+
+          {/* -----------------------------try------------------------ */}
+          {!isEditing ? (
+            <button
+              onClick={() => setIsEditing(true)}
+              className="bg-white text-red-600 border-2 border-red-200 px-8 py-3 rounded-xl font-semibold hover:border-red-300 hover:bg-red-50 transition-all duration-300 flex items-center justify-center space-x-2"
+            >
+              <FaEdit className="w-5 h-5" />
+              <span>Edit Profile</span>
+            </button>
+          ) : (
+            <button
+              onClick={handleUpdateProfile}
+              className="bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-3 rounded-xl font-semibold hover:from-red-700 hover:to-red-800 transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-red-500/30"
+            >
+              <FaSync className="w-5 h-5" />
+              <span>Save Changes</span>
+            </button>
+          )}
+          {/* -----------------------------try------------------------ */}
+
+
         </div>
       </div>
     </div>
