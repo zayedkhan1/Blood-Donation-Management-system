@@ -32,7 +32,7 @@ const MyProfileDetails = ({ userEmail }) => {
     const fetchProfile = async () => {
       try {
         setIsLoading(true);
-        const res = await fetch(`http://localhost:5000/donors/${userEmail}`);
+        const res = await fetch(`https://api-blood-donation-bs5h.onrender.com/donors/${userEmail}`);
         if (!res.ok) throw new Error("Failed to fetch profile");
         const data = await res.json();
         setDonorData(data);
@@ -51,7 +51,7 @@ const MyProfileDetails = ({ userEmail }) => {
 
     try {
       setIsUpdating(true);
-      const res = await fetch(`http://localhost:5000/donors/${donorData._id}/availability`, {
+      const res = await fetch(`https://api-blood-donation-bs5h.onrender.com/donors/${donorData._id}/availability`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ isAvailable: !donorData.isAvailable }),
@@ -71,7 +71,7 @@ const MyProfileDetails = ({ userEmail }) => {
   // -------------------------------try-------------------------
   const handleUpdateProfile = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/donors/${donorData._id}`, {
+      const res = await fetch(`https://api-blood-donation-bs5h.onrender.com/donors/${donorData._id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editedData),
@@ -244,29 +244,7 @@ const MyProfileDetails = ({ userEmail }) => {
           {/* Profile Information */}
           <div className="p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* {profileFields.map((field, index) => {
-                const Icon = field.icon;
-                return (
-                  <div 
-                    key={index}
-                    className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-200 hover:border-red-200 transition-all duration-300 hover:shadow-lg"
-                  >
-                    <div className="flex items-center space-x-4">
-                      <div className={`w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center ${field.color}`}>
-                        <Icon className="w-6 h-6" />
-                      </div>
-                      <div className="flex-1">
-                        <p className="text-sm font-semibold text-gray-600 mb-1">
-                          {field.label}
-                        </p>
-                        <p className="text-lg font-semibold text-gray-900">
-                          {field.value}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })} */}
+            
 
               {/* ---------------------------try------------------- */}
 
@@ -354,16 +332,7 @@ const MyProfileDetails = ({ userEmail }) => {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          {/* <button className="bg-white text-red-600 border-2 border-red-200 px-8 py-3 rounded-xl font-semibold hover:border-red-300 hover:bg-red-50 transition-all duration-300 flex items-center justify-center space-x-2">
-            <FaEdit className="w-5 h-5" />
-            <span>Edit Profile</span>
-          </button>
-          
-          <button className="bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-3 rounded-xl font-semibold hover:from-red-700 hover:to-red-800 transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-red-500/30">
-            <FaSync className="w-5 h-5" />
-            <span>Update Information</span>
-          </button> */}
-
+        
 
           {/* -----------------------------try------------------------ */}
           {!isEditing ? (

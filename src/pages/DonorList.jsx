@@ -23,7 +23,7 @@ const DonorList = () => {
     try {
       setIsLoading(true);
 
-      const response = await fetch("http://localhost:5000/donors"); // backend endpoint
+      const response = await fetch("https://api-blood-donation-bs5h.onrender.com/donors"); // backend endpoint
       if (!response.ok) {
         throw new Error("Failed to fetch donors");
       }
@@ -105,7 +105,7 @@ const DonorList = () => {
 
 
       // ---------new line---------
-      const response = await fetch(`http://localhost:5000/donors/${donorId}/availability`, {
+      const response = await fetch(`https://api-blood-donation-bs5h.onrender.com/donors/${donorId}/availability`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ isAvailable: newAvailability }),

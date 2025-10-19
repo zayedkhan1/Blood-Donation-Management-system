@@ -22,7 +22,7 @@ const Donate = ({ userId }) => {
     data.userId = userId; // attach logged-in user's ID
     try {
       setIsSubmitting(true);
-      const response = await fetch("http://localhost:5000/donors", {
+      const response = await fetch("https://api-blood-donation-bs5h.onrender.com/donors", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
